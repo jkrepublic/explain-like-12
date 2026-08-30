@@ -5,6 +5,82 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Agent%20Skill-d97757.svg)](https://docs.claude.com/en/docs/claude-code/skills)
+[![Single file](https://img.shields.io/badge/1%20file-7.6KB-informational.svg)](skills/explain-like-12/SKILL.md)
+[![No tools](https://img.shields.io/badge/tool%20calls-none-success.svg)](#weight-and-safety--무게와-안전)
+
+---
+
+## What changes · 무엇이 달라지나
+
+**Without the skill** — you ask for it simply, and the accurate version is gone:
+
+> **Q.** What's a cache? Explain it simply.
+>
+> **A.** A cache is like a library where you keep things you need often.
+
+You lost the eviction policy, the size limit, and the speed tradeoff. You also can't act on it.
+
+**With the skill** — the accurate version stays, and a ladder is placed next to it:
+
+> **A.** A cache is a small, fast store placed in front of a slow one. Reads hit it first; misses fall through to the origin and are written back. Because it is small, an eviction policy (LRU, LFU, TTL) decides what gets dropped when it fills.
+>
+> > 🧒 **In plain words**
+> > Instead of walking to the library every time, you keep a few books you read often on your desk. The desk is small, so when it fills up you clear out the ones you stopped opening.
+> >
+> > The analogy holds up to here — in real life the books on the desk don't vanish on their own; you have to write the rule for clearing them.
+
+Same in Korean, or any language you are working in:
+
+> **A.** MV3 서비스 워커는 유휴 30초면 종료되므로 `setTimeout`으로 장시간 대기를 구현하면 동작하지 않는다. `chrome.alarms`를 써야 한다.
+>
+> > 🧒 **쉽게 말하면**
+> > 서비스 워커는 "할 일 없으면 30초 만에 잠드는 사람"임. 자는 사람 손에 알람시계를 쥐여줘 봐야 소용없음(`setTimeout`). 벽에 걸린 알람시계(`chrome.alarms`)가 대신 울려서 깨워야 함.
+
+Three things are load-bearing and easy to miss:
+
+1. **The technical answer is untouched.** This skill appends; it never rewrites.
+2. **The analogy shares the mechanism** — desk/library maps speed, capacity *and* eviction. Not just "a place where things are kept."
+3. **It says where the analogy breaks.** That last line is what stops a reader from acting on the metaphor as if it were the fact.
+
+---
+
+## Not the same as `eli5` · 기존 eli5 와 다른 점
+
+There is already an [`eli5` plugin](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) in the Claude community marketplace. It is a good tool for a different job. Pick by what you need:
+
+| | `eli5` | `explain-like-12` (this) |
+|---|---|---|
+| Output | A **separate** HTML artifact, big pictures, few words | A block **appended beneath** the original answer |
+| Audience | Someone who knows **nothing** about the topic | Someone who lacks the **vocabulary**, not the concepts |
+| The original explanation | Not part of the output | **Preserved verbatim** — that is the point |
+| Invocation | `/eli5 <topic>` — you ask for a standalone explainer | Fires mid-answer, on "I don't get it", "explain simply", "ELI5" |
+| Guardrails | — | 6 fixed rules, incl. an explicit **simplify-vs-distort** line |
+| Best for | Onboarding a total newcomer to a subject | Reading a technical answer you must **act on** |
+
+Short version: `eli5` **replaces**, this one **annotates**. Use `eli5` to learn a topic cold; use this when you need the precise answer *and* the intuition in the same place.
+
+---
+
+## Weight and safety · 무게와 안전
+
+Loading many skills costs context, and installing someone else's prompt is a real supply-chain question. Both concerns are fair. Here are the measured numbers so you don't have to take it on faith:
+
+| | Measured |
+|---|---|
+| Files in the skill | **1** (`SKILL.md`, no scripts, no assets) |
+| Size | **7,594 bytes** |
+| **Always** in your context (the `description`) | 346 chars ≈ **~230 tokens**\* |
+| Loaded only **when it fires** (the body) | 3,162 chars ≈ ~2,100 tokens\* |
+| `allowed-tools` declared | **none** |
+| Shell / command execution | **none** |
+| Network calls, URLs, fetches | **none** |
+| Executable files (`.py`/`.js`/`.sh`) | **0** |
+
+\* Token counts are an approximation (≈1.5 Korean chars per token), not an exact tokenizer measurement.
+
+It is a text file with instructions for writing. It cannot run anything, reach anything, or read anything. You are encouraged to open [the whole file](skills/explain-like-12/SKILL.md) — it is 134 lines — and to have your agent audit it before installing, as you should with any skill.
+
+**And if you'd rather not install it at all:** take the six rules and write your own. That is a completely reasonable way to use this repo, and the rules are in the README below for exactly that reason.
 
 ---
 
@@ -42,12 +118,7 @@
 
 ### 예시
 
-**기술**
-
-> MV3 서비스 워커는 유휴 30초면 종료되므로 `setTimeout`으로 장시간 대기를 구현하면 동작하지 않는다. `chrome.alarms`를 써야 한다.
->
-> 🧒 **쉽게 말하면**
-> 서비스 워커는 "할 일 없으면 30초 만에 잠드는 사람"임. 자는 사람 손에 알람시계를 쥐여줘 봐야 소용없음(`setTimeout`). 벽에 걸린 알람시계(`chrome.alarms`)가 대신 울려서 깨워야 함.
+기술 예시는 [맨 위](#what-changes--무엇이-달라지나)에 있다. 이 스킬이 코드 밖에서도 그대로 도는 걸 보여주는 둘.
 
 **재무**
 
