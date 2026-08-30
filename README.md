@@ -138,16 +138,26 @@ It is a text file with instructions for writing. It cannot run anything, reach a
 
 ### 설치
 
-**방법 1 — 플러그인으로 (권장)**
+**방법 1 — `skills` CLI (가장 짧고, 클로드 코드 밖에서도 됨)**
 
-Claude Code 에서:
+```bash
+npx skills add jkrepublic/explain-like-12
+```
+
+[skills](https://github.com/vercel-labs/skills) 는 Claude Code · Codex · Cursor · OpenCode 등을 지원한다. 설치 없이 한 번만 써보려면:
+
+```bash
+npx skills use jkrepublic/explain-like-12 | claude
+```
+
+**방법 2 — 클로드 코드 플러그인으로**
 
 ```
 /plugin marketplace add jkrepublic/explain-like-12
 /plugin install explain-like-12@explain-like-12
 ```
 
-**방법 2 — 스킬 파일만 직접**
+**방법 3 — 스킬 파일만 직접**
 
 ```bash
 git clone https://github.com/jkrepublic/explain-like-12.git
@@ -191,7 +201,19 @@ The skill works on code and system design, but equally on **marketing, contracts
 
 ### Install
 
-**As a plugin (recommended)** — in Claude Code:
+**With the [`skills`](https://github.com/vercel-labs/skills) CLI** — shortest, and works beyond Claude Code (Codex, Cursor, OpenCode, and others):
+
+```bash
+npx skills add jkrepublic/explain-like-12
+```
+
+Try it once without installing anything:
+
+```bash
+npx skills use jkrepublic/explain-like-12 | claude
+```
+
+**As a Claude Code plugin:**
 
 ```
 /plugin marketplace add jkrepublic/explain-like-12
