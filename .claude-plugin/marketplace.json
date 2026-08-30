@@ -1,0 +1,38 @@
+{
+  "name": "explain-like-12",
+  "owner": {
+    "name": "jkrepublic"
+  },
+  "metadata": {
+    "description": "A skill that adds a 12-year-old's explanation without deleting the accurate one."
+  },
+  "plugins": [
+    {
+      "name": "explain-like-12",
+      "source": "./",
+      "description": "Adds a 12-year-old's explanation beneath the technical one instead of replacing it. Six fixed rules keep the simple version from becoming a wrong version.",
+      "author": {
+        "name": "jkrepublic"
+      },
+      "homepage": "https://github.com/jkrepublic/explain-like-12",
+      "repository": "https://github.com/jkrepublic/explain-like-12",
+      "license": "MIT",
+      "keywords": [
+        "eli5",
+        "explanation",
+        "analogy",
+        "teaching",
+        "communication",
+        "plain-language",
+        "korean"
+      ],
+      "category": "productivity",
+      "tags": [
+        "skills",
+        "explanation",
+        "teaching",
+        "writing"
+      ]
+    }
+  ]
+}

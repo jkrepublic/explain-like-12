@@ -1,0 +1,24 @@
+{
+  "name": "explain-like-12",
+  "version": "1.0.0",
+  "description": "Adds a 12-year-old's explanation beneath the technical one instead of replacing it. Six fixed rules: vocabulary not concepts, simplify never distort, analogies must share the mechanism not the mood, draw only from a child's world, turn numbers into graspable sizes, and state where the analogy breaks. Works on code, marketing, contracts, finance, law and medicine.",
+  "author": {
+    "name": "jkrepublic",
+    "url": "https://github.com/jkrepublic"
+  },
+  "homepage": "https://github.com/jkrepublic/explain-like-12",
+  "repository": "https://github.com/jkrepublic/explain-like-12",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "agent-skills",
+    "eli5",
+    "explanation",
+    "analogy",
+    "teaching",
+    "communication",
+    "plain-language",
+    "korean"
+  ],
+  "skills": ["./skills/"]
+}
