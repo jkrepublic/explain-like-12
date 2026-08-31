@@ -95,6 +95,45 @@ It is a text file with instructions for writing. It cannot run anything, reach a
 
 ---
 
+## The rules are executable · 규칙을 돌려볼 수 있다
+
+A skill is a prompt, so it cannot be unit-tested — but its rules can be turned
+into checks and run.
+
+```console
+$ node evals/run.cjs
+
+  9 cases — 6 reference, 3 known-bad
+  9/9 graded as expected
+  rule 6 ("say where the analogy breaks") present in 3/6 reference cases
+  4 rules need judgement and are not checked here — see evals/judge-prompt.md
+```
+
+Five checks run with **no model, no network and no API key**: the technical
+answer survived word for word, the `🧒` block exists, it sits beneath rather
+than in front, there are at most three, and the tone does not talk down.
+
+**Three cases are supposed to fail.** Each breaks exactly one rule, and the run
+reports a failure if any of them passes — a grader that cannot go red is
+indistinguishable from one that never ran.
+
+The four rules that need a reader (does the analogy share the *mechanism*, were
+any facts invented, is it a 12-year-old's world, were the numbers made
+hand-sized) live in [`evals/judge-prompt.md`](evals/judge-prompt.md) as a prompt
+you paste — deliberately not an API call, since this repo asks for no keys.
+
+**What that number is not.** `9/9` means the grader works. It does not mean a
+model follows the skill: the six reference cases are hand-written fixtures. To
+learn something about a model, grade an answer you actually got back —
+
+```bash
+node evals/run.cjs --check my-answer.md --against my-original.md
+```
+
+Details, and how to add a case, in [`evals/README.md`](evals/README.md).
+
+---
+
 ## 한국어
 
 ### 이 스킬이 푸는 문제
