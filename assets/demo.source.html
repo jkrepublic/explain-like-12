@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+:root{
+  --bg:#ffffff; --card:#ffffff; --ink:#12161f; --ink2:#48505f; --ink3:#767f90;
+  --line:#e2e6ee; --rule:#eef1f6;
+  --bad:#b4451f; --badbg:#fdf1ec; --badline:#eec4b1;
+  --good:#0f766e; --goodbg:#e9f5f3; --goodline:#a8d6cf;
+  --kid:#8a6d0b; --kidbg:#fffbeb; --kidline:#efdda3;
+  --code:#f1f4f8;
+}
+html.dark{
+  --bg:#0e1218; --card:#151b24; --ink:#e8edf5; --ink2:#a8b2c2; --ink3:#798394;
+  --line:#242c39; --rule:#1c232e;
+  --bad:#f0917a; --badbg:#2a1a15; --badline:#4a2c22;
+  --good:#5ec7b8; --goodbg:#12251f; --goodline:#245045;
+  --kid:#e8c96b; --kidbg:#241f10; --kidline:#4a3d18;
+  --code:#1b222c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); width:1400px;
+  font-family:'Segoe UI','Malgun Gothic',-apple-system,system-ui,sans-serif;
+  font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  padding:44px 44px 40px;
+}
+.top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.name{font-size:23px;font-weight:800;letter-spacing:-.03em}
+.tag{font-size:15px;color:var(--ink2)}
+.q{
+  font-size:15px;color:var(--ink2);margin:16px 0 22px;padding:11px 16px;
+  background:var(--code);border-radius:9px;display:inline-block;
+}
+.q b{color:var(--ink);font-weight:650}
+
+.cols{display:flex;gap:22px;align-items:stretch}
+.col{flex:1;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.col.bad{border-color:var(--badline)}
+.col.good{border-color:var(--goodline)}
+.hd{padding:12px 20px;font-size:13.5px;font-weight:750;letter-spacing:.01em;border-bottom:1px solid var(--rule)}
+.col.bad .hd{background:var(--badbg);color:var(--bad);border-bottom-color:var(--badline)}
+.col.good .hd{background:var(--goodbg);color:var(--good);border-bottom-color:var(--goodline)}
+.bd{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column}
+
+.ans{font-size:15.5px;color:var(--ink)}
+.ans code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em;
+  font-family:'Cascadia Mono',Consolas,monospace}
+
+.kid{
+  margin-top:16px;border-left:4px solid var(--kidline);background:var(--kidbg);
+  border-radius:0 10px 10px 0;padding:13px 18px;
+}
+.kid .k{font-size:13px;font-weight:800;color:var(--kid);margin-bottom:5px}
+.kid p{font-size:15px;color:var(--ink)}
+.kid .edge{margin-top:9px;padding-top:8px;border-top:1px dashed var(--kidline);
+  font-size:13.5px;color:var(--ink2)}
+
+.lost{margin-top:auto;padding-top:18px}
+.lost .t{font-size:12.5px;font-weight:750;color:var(--ink3);letter-spacing:.06em;margin-bottom:7px}
+.item{font-size:14.5px;margin-bottom:5px;color:var(--ink2)}
+.x{color:var(--bad);font-weight:800;margin-right:7px}
+.o{color:var(--good);font-weight:800;margin-right:7px}
+
+.foot{margin-top:26px;font-size:14px;color:var(--ink3);text-align:center}
+.foot b{color:var(--ink2);font-weight:650}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="name">explain-like-12</div>
+  <div class="tag">It <b>appends</b> the plain-words version. It never replaces the accurate one.</div>
+</div>
+
+<div class="q"><b>Q.</b> What's a cache? Explain it simply.</div>
+
+<div class="cols">
+
+  <div class="col bad">
+    <div class="hd">WITHOUT — you asked for simple, so the accurate answer is gone</div>
+    <div class="bd">
+      <div class="ans">A cache is like a library where you keep things you need often.</div>
+      <div class="lost">
+        <div class="t">WHAT YOU LOST</div>
+        <div class="item"><span class="x">✕</span>the eviction policy</div>
+        <div class="item"><span class="x">✕</span>the size limit</div>
+        <div class="item"><span class="x">✕</span>anything you could act on</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col good">
+    <div class="hd">WITH — the accurate answer stays, a ladder is placed beside it</div>
+    <div class="bd">
+      <div class="ans">A cache is a small, fast store placed in front of a slow one. Reads hit it
+        first; misses fall through to the origin and are written back. Because it is small, an
+        eviction policy (<code>LRU</code>, <code>LFU</code>, <code>TTL</code>) decides what gets
+        dropped when it fills.</div>
+      <div class="kid">
+        <div class="k">🧒 In plain words</div>
+        <p>Instead of walking to the library every time, you keep a few books you read often on
+          your desk. The desk is small, so when it fills up you clear out the ones you stopped
+          opening.</p>
+        <div class="edge">The analogy holds up to here — in real life the books don't vanish on
+          their own; you have to write the rule for clearing them.</div>
+      </div>
+      <div class="lost">
+        <div class="t">WHAT YOU KEPT</div>
+        <div class="item"><span class="o">✓</span>every technical term, verbatim</div>
+        <div class="item"><span class="o">✓</span>an analogy that shares the <b>mechanism</b> — speed, capacity, eviction</div>
+        <div class="item"><span class="o">✓</span>the point where the analogy stops being true</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">One file · <b>7.6 KB</b> · no tool calls, no shell, no network · always-on context cost <b>~230 tokens</b></div>
+
+<script>
+  if (location.search.indexOf("dark") >= 0) document.documentElement.className = "dark";
+</script>
+</body>
+</html>

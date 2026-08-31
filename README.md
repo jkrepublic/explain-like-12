@@ -8,6 +8,11 @@
 [![Single file](https://img.shields.io/badge/1%20file-7.6KB-informational.svg)](skills/explain-like-12/SKILL.md)
 [![No tools](https://img.shields.io/badge/tool%20calls-none-success.svg)](#weight-and-safety--무게와-안전)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/demo-dark.png">
+  <img src="assets/demo-light.png" alt="Two answers to 'What's a cache? Explain it simply.' On the left, without the skill: one vague sentence, and the eviction policy, the size limit and anything actionable are gone. On the right, with the skill: the technical answer stays verbatim and a plain-words block is appended beneath it, ending with the point where the analogy stops being true.">
+</picture>
+
 ---
 
 ## What changes · 무엇이 달라지나
@@ -44,20 +49,26 @@ Three things are load-bearing and easy to miss:
 
 ---
 
-## Not the same as `eli5` · 기존 eli5 와 다른 점
+## How this differs from the other ELI5 skills · 기존 ELI5 스킬과 다른 점
 
-There is already an [`eli5` plugin](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) in the Claude community marketplace. It is a good tool for a different job. Pick by what you need:
+Two good tools already exist for adjacent jobs. They are worth knowing about, and for most
+"help me understand this topic" work they are the better pick. Choose by what you need:
 
-| | `eli5` | `explain-like-12` (this) |
-|---|---|---|
-| Output | A **separate** HTML artifact, big pictures, few words | A block **appended beneath** the original answer |
-| Audience | Someone who knows **nothing** about the topic | Someone who lacks the **vocabulary**, not the concepts |
-| The original explanation | Not part of the output | **Preserved verbatim** — that is the point |
-| Invocation | `/eli5 <topic>` — you ask for a standalone explainer | Fires mid-answer, on "I don't get it", "explain simply", "ELI5" |
-| Guardrails | — | 6 fixed rules, incl. an explicit **simplify-vs-distort** line |
-| Best for | Onboarding a total newcomer to a subject | Reading a technical answer you must **act on** |
+| | [`eli5` plugin](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) | [DreambigOu/ELI5](https://github.com/DreambigOu/ELI5) | `explain-like-12` (this) |
+|---|---|---|---|
+| **The original explanation** | Not part of the output | Rewritten for the audience | **Preserved verbatim** — that is the point |
+| What it produces | A **separate** HTML artifact, big pictures, few words | One answer, **re-pitched** to whoever is listening | A block **appended beneath** the original answer |
+| Who you tune for | Someone who knows nothing about the topic | Pick an audience: 5-year-old, manager, engineer, your mom | Nobody — it always adds the same second layer |
+| Invocation | `/eli5 <topic>` — you ask for a standalone explainer | `ELI5 <thing>`, `explain this to my manager` | Fires mid-answer, on "I don't get it", "explain simply", "ELI5" |
+| Guardrails | — | — | 6 fixed rules, incl. an explicit **simplify-vs-distort** line, and a required note on **where the analogy breaks** |
+| Best for | Onboarding a total newcomer to a subject | Handing the same idea to a different reader | Reading a technical answer you must **act on** |
 
-Short version: `eli5` **replaces**, this one **annotates**. Use `eli5` to learn a topic cold; use this when you need the precise answer *and* the intuition in the same place.
+Short version: the other two **replace** the explanation — one with a picture-led artifact, one with
+an audience-tuned rewrite. This one **annotates** it and leaves the original standing.
+
+That distinction only matters in one situation, but it is a common one: **you are the reader, and you
+have to act on the answer.** A rewrite optimised for your manager is not a thing you can paste into a
+config file. If you are learning a subject cold, use one of the others — they are better at it.
 
 ---
 
