@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Agent%20Skill-d97757.svg)](https://docs.claude.com/en/docs/claude-code/skills)
-[![Single file](https://img.shields.io/badge/1%20file-7.6KB-informational.svg)](skills/explain-like-12/SKILL.md)
+[![Single file](https://img.shields.io/badge/1%20file-7597%20bytes-informational.svg)](skills/explain-like-12/SKILL.md)
 [![No tools](https://img.shields.io/badge/tool%20calls-none-success.svg)](#weight-and-safety--무게와-안전)
 
 <picture>
@@ -49,26 +49,36 @@ Three things are load-bearing and easy to miss:
 
 ---
 
-## How this differs from the other ELI5 skills · 기존 ELI5 스킬과 다른 점
+## How this differs from the other plain-language skills · 다른 쉬운말 스킬과 다른 점
 
-Two good tools already exist for adjacent jobs. They are worth knowing about, and for most
-"help me understand this topic" work they are the better pick. Choose by what you need:
+Four good tools already exist for adjacent jobs, and for most "make this easier to read" work they
+are the better pick. **All four change the text. This one leaves it standing and writes underneath.**
 
-| | [`eli5` plugin](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) | [DreambigOu/ELI5](https://github.com/DreambigOu/ELI5) | `explain-like-12` (this) |
+| | What happens to the original | What you get | Best for |
 |---|---|---|---|
-| **The original explanation** | Not part of the output | Rewritten for the audience | **Preserved verbatim** — that is the point |
-| What it produces | A **separate** HTML artifact, big pictures, few words | One answer, **re-pitched** to whoever is listening | A block **appended beneath** the original answer |
-| Who you tune for | Someone who knows nothing about the topic | Pick an audience: 5-year-old, manager, engineer, your mom | Nobody — it always adds the same second layer |
-| Invocation | `/eli5 <topic>` — you ask for a standalone explainer | `ELI5 <thing>`, `explain this to my manager` | Fires mid-answer, on "I don't get it", "explain simply", "ELI5" |
-| Guardrails | — | — | 6 fixed rules, incl. an explicit **simplify-vs-distort** line, and a required note on **where the analogy breaks** |
-| Best for | Onboarding a total newcomer to a subject | Handing the same idea to a different reader | Reading a technical answer you must **act on** |
+| [`eli5` plugin](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) | Not part of the output | A **separate** HTML artifact — big pictures, few words | Onboarding a total newcomer to a subject |
+| [DreambigOu/ELI5](https://github.com/DreambigOu/ELI5) | **Rewritten** for a chosen audience | One answer, re-pitched — 5-year-old, manager, engineer, your mom | Handing the same idea to a different reader |
+| [kharmanskyi/open-steps](https://github.com/kharmanskyi/open-steps) | **Rewritten** as a plain report | Honest reports, straight verdicts, steps you can follow | Making an agent's *own* output readable |
+| [GaZmagik/iso-24495](https://github.com/GaZmagik/iso-24495) | **Rewritten — everything, always** | An output style plus seven skills; every response comes out plain | Making a whole agent write to a plain-language standard |
+| [danyuchn/iso-24495-skill](https://github.com/danyuchn/iso-24495-skill) | **Rewritten** to four reader outcomes | A plainer version — English or 繁體中文 | A document that must *be* plain, not one that needs a gloss |
+| **`explain-like-12`** (this) | **Preserved verbatim** — that is the point | A block **appended beneath** the original answer | Reading a technical answer you must **act on** |
 
-Short version: the other two **replace** the explanation — one with a picture-led artifact, one with
-an audience-tuned rewrite. This one **annotates** it and leaves the original standing.
+They also differ in how they start. You invoke the other four on a text you already have. This one
+fires *inside* an answer you are already reading — on "I don't get it", "explain simply", "ELI5" —
+and it carries six fixed rules the others do not need, including an explicit **simplify-vs-distort**
+line and a required note on **where the analogy breaks**.
+
+**On ISO 24495-1.** Two of the four implement ISO 24495-1:2023, *Plain language — Part 1: Governing
+principles and guidelines* — the international standard that defines plain language by reader
+outcome rather than by word lists: readers can find what they need, understand it, and act on it.
+**This skill does not implement that standard and makes no conformance claim.** It answers a
+narrower question. The standard asks *"is this document plain?"*; this skill asks *"the answer in
+front of me is not plain, and I still need the precise version."*
 
 That distinction only matters in one situation, but it is a common one: **you are the reader, and you
 have to act on the answer.** A rewrite optimised for your manager is not a thing you can paste into a
-config file. If you are learning a subject cold, use one of the others — they are better at it.
+config file. If you are learning a subject cold — or shipping a document that must read plainly —
+use one of the others. They are better at it.
 
 ---
 
@@ -79,8 +89,8 @@ Loading many skills costs context, and installing someone else's prompt is a rea
 | | Measured |
 |---|---|
 | Files in the skill | **1** (`SKILL.md`, no scripts, no assets) |
-| Size | **7,594 bytes** |
-| **Always** in your context (the `description`) | 346 chars ≈ **~230 tokens**\* |
+| Size | **7,597 bytes** |
+| **Always** in your context (the `description`) | 347 chars ≈ **~230 tokens**\* |
 | Loaded only **when it fires** (the body) | 3,162 chars ≈ ~2,100 tokens\* |
 | `allowed-tools` declared | **none** |
 | Shell / command execution | **none** |
